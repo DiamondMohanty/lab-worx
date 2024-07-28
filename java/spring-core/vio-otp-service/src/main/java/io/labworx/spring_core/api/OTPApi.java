@@ -1,18 +1,20 @@
 package io.labworx.spring_core.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import io.labworx.spring_core.service.VioOTPService;
-import io.labworx.spring_core.service.VioOTPServiceImpl;
 
 public class OTPApi {
 
+    @Autowired
     private VioOTPService vioOTPService;
 
-    public OTPApi() {
-        this.vioOTPService = new VioOTPServiceImpl();
+    public String getOTP(int seed) {
+        return "OTP: " + vioOTPService.getOTP(seed) + " expires in " + vioOTPService.getExpiry();
     }
 
-    public int getOTP(int seed) {
-        return vioOTPService.getOTP(seed);
+    public void setExpiry(int timeInSeconds) {
+        vioOTPService.setExpiry(timeInSeconds);
     }
 
 }
